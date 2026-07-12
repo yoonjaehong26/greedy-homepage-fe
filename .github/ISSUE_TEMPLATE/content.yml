@@ -1,0 +1,32 @@
+name: 콘텐츠 갱신
+description: 커리큘럼, 문구, 링크 등 내용 변경
+title: "content: "
+body:
+  - type: markdown
+    attributes:
+      value: 새 기수 정보 반영, 문구 수정, 링크 교체 요청. 직접 수정할 경우 src/data 폴더를 고쳐 PR 생성.
+  - type: dropdown
+    id: where
+    attributes:
+      label: 대상 영역
+      options:
+        - 홈
+        - 활동
+        - 멤버
+        - 스터디
+        - 프로젝트
+        - 링크와 문의처
+        - 모집 상태 (열기/닫기)
+        - 기타
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: 변경 내용
+      description: 변경 전과 후를 함께 작성
+      placeholder: |
+        지금: 4기 커리큘럼
+        변경: 5기 커리큘럼 (노션 링크 첨부)
+    validations:
+      required: true

@@ -1,0 +1,29 @@
+name: 버그 신고
+description: 잘못된 화면과 동작 신고
+title: "fix: "
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 문제 상황
+      placeholder: 모바일에서 GNB의 지원하기 버튼이 잘림
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: 재현 방법
+      placeholder: |
+        1. 폰에서 홈 접속
+        2. 아래로 스크롤
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: 환경
+      placeholder: iPhone 15 Safari, 데스크톱 Chrome 등
+  - type: textarea
+    id: shot
+    attributes:
+      label: 스크린샷

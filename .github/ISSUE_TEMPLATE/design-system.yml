@@ -1,0 +1,36 @@
+name: 디자인 시스템 변경
+description: 토큰과 공용 컴포넌트(src/components/ui) 변경 및 추가. 변경 전에 이 이슈를 먼저 생성
+title: "design: "
+body:
+  - type: markdown
+    attributes:
+      value: 디자인 시스템은 모든 페이지가 공유하는 기반. 변경은 이슈로 먼저 공유하고 별도 PR로 진행.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 변경 종류
+      options:
+        - 토큰 (색, 글자, 간격, 라운드)
+        - 기존 컴포넌트 수정
+        - 새 컴포넌트 추가
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 변경 내용
+      placeholder: Button에 loading 상태 추가
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 필요한 이유
+      description: 어느 화면에서 어떤 문제가 있었는지
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: 영향 범위
+      description: 함께 바뀌는 화면과 컴포넌트
