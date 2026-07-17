@@ -21,7 +21,7 @@ const meta = {
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
-      description: "sm은 표나 카드 안, lg는 랜딩의 주요 버튼. 모바일에서 sm은 md로 키워요",
+      description: "sm은 표나 카드 안, lg는 랜딩의 주요 버튼. 어느 크기든 눌리는 영역은 44px라 그냥 써도 돼요",
     },
     href: { control: "text", description: "값을 주면 버튼 모양의 링크(a)로 렌더링" },
     disabled: { control: "boolean" },
@@ -59,6 +59,35 @@ export const Sizes: Story = {
         lg 48
       </Button>
     </div>
+  ),
+};
+
+export const TouchTarget: Story = {
+  name: "규칙: 눌리는 영역 44px",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "버튼이 작으면 손가락으로 정확히 누르기 어려워요. 그래서 누르는 요소는 최소 44px가 되도록 해요. sm(32px)과 md(40px)는 이보다 작지만, 버튼을 키우면 디자인이 달라져요. 그래서 버튼 크기는 그대로 두고, 눌리는 범위만 44px로 넓혔어요. 아래 점선이 그 범위이고, 실제 화면에서는 보이지 않아요. lg는 이미 48px라 넓힐 필요가 없어서 점선이 버튼 안에 있어요.",
+      },
+    },
+  },
+  render: (args) => (
+    <>
+      {/* 눌리는 영역은 원래 보이지 않아요. 이 스토리에서만 점선으로 드러내요 */}
+      <style>{".touch-target :is(button, a)::after { outline: 1px dashed var(--color-text-subtle) }"}</style>
+      <div className="touch-target flex items-end gap-3">
+        <Button {...args} size="sm">
+          sm 32
+        </Button>
+        <Button {...args} size="md">
+          md 40
+        </Button>
+        <Button {...args} size="lg">
+          lg 48
+        </Button>
+      </div>
+    </>
   ),
 };
 
