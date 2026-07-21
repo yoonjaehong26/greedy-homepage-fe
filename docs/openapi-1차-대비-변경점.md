@@ -81,22 +81,27 @@
 5. **[projects] 팀원 응답에서 내부 멤버 / 외부 기여자 구분 가능 여부** (§2) — 백엔드는 member(NOT NULL)와
    external_contributor를 분리해 저장하는데(저장 방식은 백엔드 몫), **응답에서 둘을 구분만 할 수 있으면** 돼요.
    프론트가 그걸로 '외부' 뱃지·프로필 링크 유무를 정해요.
+6. **[projects] mainFunction을 리스트(`List<String>`)로 변경 요청** — 프로젝트 상세 화면의 "주요 기능"은
+   불릿 리스트(프로젝트당 5개 안팎)인데, 현재 엔티티는 `mainFunction TEXT`(문장 1개)예요. 이 UI대로
+   가려면 리스트로 줘야 해요. 참고로 summary(한 줄 설명)·purpose(어떤 문제를 풀었나요)는 현재
+   구조 그대로 화면과 1:1이라 변경 불필요 — mainFunction만 모양이 어긋나요.
+   (리스트로 바뀌기 전까지 프론트는 이 필드를 무시하고 큐레이션 불릿을 써요.)
 
 프론트가 따라가면 되는 것(백엔드 결정 나오면 프론트 반영):
 
-6. **[members] StackPosition에 DESIGN 추가됨** — 백엔드가 DESIGN을 응답에 쓰면 따라가요. 프론트에 매핑
+7. **[members] StackPosition에 DESIGN 추가됨** — 백엔드가 DESIGN을 응답에 쓰면 따라가요. 프론트에 매핑
    한 줄(project/api.ts `STACK_POSITION_TO_MEMBER_POSITION`) 추가하고 디자이너 표기(예: "디자인")만 정하면 돼요.
 
 당장 구현엔 안 걸리지만 답을 알아야 하는 것:
 
-7. **[members] MemberRole에 회장(CLUB_LEAD)·영입리드 등 추가 여부** — 안 되면 역할 표기는 계속 프론트 큐레이션 (§3).
+8. **[members] MemberRole에 회장(CLUB_LEAD)·영입리드 등 추가 여부** — 안 되면 역할 표기는 계속 프론트 큐레이션 (§3).
    (백엔드가 MemberActivityType → **MemberRole**로 개명함. 현재 값은 1차와 동일.)
-8. **[members] MemberAction.stackPosition(기수별 트랙) 신설 여부** — 기존 요청 유지 (§3).
+9. **[members] MemberAction.stackPosition(기수별 트랙) 신설 여부** — 기존 요청 유지 (§3).
    (백엔드가 MemberActivity 엔티티 → **MemberAction**으로 개명함. 아직 stackPosition 없음.)
-9. **[members] description·teamProjects 유지 여부** — description은 **Member 엔티티에 이미 있음**(확인됨).
+10. **[members] description·teamProjects 유지 여부** — description은 **Member 엔티티에 이미 있음**(확인됨).
    teamProjects(참여 프로젝트 조인)는 응답에 포함될지 DTO PR 때 확인. Phase 2 대비 (§3).
-10. **[공통] Department enum 실제 학과 목록 확정** — 백엔드도 현재 비어 있음(`//Todo`).
-11. **[공통] 이미지 URL의 호스트(도메인) 확정** — thumbnailUrl·imageUrl 등이 어떤 도메인(S3 버킷 주소 등)으로
+11. **[공통] Department enum 실제 학과 목록 확정** — 백엔드도 현재 비어 있음(`//Todo`).
+12. **[공통] 이미지 URL의 호스트(도메인) 확정** — thumbnailUrl·imageUrl 등이 어떤 도메인(S3 버킷 주소 등)으로
     나올지 알려주세요. 프론트의 next/image는 허용 도메인을 빌드 설정에 미리 등록해야 해서(next.config.ts
     `remotePatterns`), 도메인이 확정돼야 이미지가 화면에 떠요. mock으로 미리 검증 불가능한 부분이라
     **실제 이미지 URL이 나오는 즉시 공유가 필요해요.**
