@@ -95,8 +95,11 @@
 
 당장 구현엔 안 걸리지만 답을 알아야 하는 것:
 
-8. **[members] MemberRole에 회장(CLUB_LEAD)·영입리드 등 추가 여부** — 안 되면 역할 표기는 계속 프론트 큐레이션 (§3).
-   (백엔드가 MemberActivityType → **MemberRole**로 개명함. 현재 값은 1차와 동일.)
+8. **[members] MemberRole에 회장(예: CLUB_LEAD) 값 1개 추가** — 화면 역할 문구를 실데이터로 전수 조사한
+   결과, 운영진=MAINTAINER 대응은 1기까지 전부 확인됐고(리드=STUDY_LEAD, 리뷰어=REVIEWER, 멤버=STUDY_MEMBER,
+   창립=CO_FOUNDER도 일치), **enum으로 표현 안 되는 건 "회장"(이승용 1~3기, 정상희 4기) 하나뿐이에요.**
+   이전에 언급한 "영입리드"는 실데이터에 없어서 요청에서 뺐어요. 이 값 추가 + 9번(기수별 트랙)이 되면
+   멤버 이력 큐레이션 전체를 API로 대체할 수 있어요.
 9. **[members] MemberAction.stackPosition(기수별 트랙) 신설 여부** — 기존 요청 유지 (§3).
    (백엔드가 MemberActivity 엔티티 → **MemberAction**으로 개명함. 아직 stackPosition 없음.)
 10. **[members] `/members/{id}` 상세의 description·teamProjects 컨펌** — 스펙에 복원했어요(§3).
